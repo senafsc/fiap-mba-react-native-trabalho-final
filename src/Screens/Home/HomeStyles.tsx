@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { Image } from "react-native-elements";
+import { Button } from "react-native-elements";
 import Colors from "../../Styles/Colors";
 
 export const MainSafeAreaView = styled.SafeAreaView`
@@ -8,30 +8,45 @@ export const MainSafeAreaView = styled.SafeAreaView`
   justify-content: flex-start;
 `;
 
+export const LoadingContainer = styled.View`
+  flex: 1;
+  height: 100%
+  margin-top: 50%
+`
+
 export const StyledActivityIndicator = styled.ActivityIndicator`
   margin-top: 30px;
 `;
 
-export const ContainerItem = styled.TouchableHighlight`
+export const ContainerItem = styled.TouchableOpacity`
+  margin-top: 10px;
   margin-bottom: 10px;
 `;
 
 export const TextsView = styled.View`
   flex: 1;
   flex-direction: row;
-  justify-content: flex-start;
-  margin-bottom: 2px;
+  padding: 5px;
+  margin-horizontal: 12px;
 `;
 
 export const TextNameStyle = styled.View`
   flex-direction: row;
   justify-content: flex-start;
+  flex: 1
 `;
 export const TextTitle = styled.Text`
-  font-size: 18px;
+  font-size: 14px;
 `;
+
+export const TextTitleName = styled.Text`
+  font-size: 14px;
+  margin: 2px;
+`;
+
 export const TextDetail = styled.Text`
-  font-size: 12px;
+  font-size: 14px;
+  margin: 2px;
 `;
 
 export const Separator = styled.Text`
@@ -40,12 +55,18 @@ export const Separator = styled.Text`
   background-color: ${Colors.NeutralMedium};
   margin-left: 10px;
   margin-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 `;
 
-export const StyledImage = styled(Image).attrs({
+export const StyledButton = styled(Button).attrs({
+  buttonStyle: {
+    backgroundColor: `${Colors.blueviolet}`,
+    borderRadius: 10,
+  },
   containerStyle: {
-    width: 50,
-    height: 50,
-    margin: 10,
+    padding: 8,
+    height: "100%",
+    flex: 1,
   },
 })``;

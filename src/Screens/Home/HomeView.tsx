@@ -13,21 +13,25 @@ import {
   TextTitle,
   TextDetail,
   Separator,
-  StyledImage,
+  TextTitleName,
+  StyledButton,
+  LoadingContainer
 } from "./HomeStyles";
 import DrawerMenu from "../../Components/DrawerMenu/DrawerMenu";
 import IProduct from "../../Interfaces/IProduct";
 
 type iProps = {
-  dataConnection: IPerson[];
+  getNewDataPage: (pageIndex: number) => void
   testeConnection: IProduct[];
+  currentPage: number;
   isLoading: boolean;
   goToDetail: (item: IProduct) => void;
 };
 
 const HomeView = ({
+  currentPage,
   testeConnection,
-  dataConnection,
+  getNewDataPage,
   isLoading,
   goToDetail,
 }: iProps) => {
@@ -36,59 +40,69 @@ const HomeView = ({
   const RenderItem = ({ item }: { item: IProduct }) => {
     
     return (
-      <ContainerItem
-        onPress={() => goToDetail(item)}
-        testID={"button" + item.id}
-      >
-        <>
-          <TextsView>
-            {/* <View>
-              <StyledImage source={{ uri: item.image }} />
-            </View> */}
-            <View>
-              <TextNameStyle>
-                <TextTitle>
-                  {item.name}
-                </TextTitle>
-              </TextNameStyle>
-              <TextNameStyle>
-                <TextDetail>
-                  {item.price}
-                </TextDetail>
-              </TextNameStyle>
-              <TextNameStyle>
-                <TextDetail>{item.favorite}</TextDetail>
-              </TextNameStyle>
-            </View>
-          </TextsView>
-          <Separator />
-        </>
-      </ContainerItem>
+      <>
+        <ContainerItem
+          onPress={() => goToDetail(item)}
+          testID={"button" + item.id}
+        >
+          <>
+            <TextsView>
+              {/* <View>
+                <StyledImage source={{ uri: item.image }} />
+              </View> */}
+              <View style={{ maxWidth: '90%', justifyContent: 'center' }}>
+                <TextNameStyle>
+                  <TextTitleName>Nome:</TextTitleName>
+                  <TextTitle>{item.name}</TextTitle>
+                </TextNameStyle>
+
+                <TextNameStyle>
+                  <TextDetail>Preço:</TextDetail>
+                  <TextDetail>{item.price}</TextDetail>
+                </TextNameStyle>
+
+                <TextNameStyle>
+                  <TextDetail>Favorito:</TextDetail>
+                  <TextDetail>{item.favorite ? 'Sim' : 'Não'}</TextDetail>
+                </TextNameStyle>
+              </View>
+            </TextsView>
+            <Separator />
+          </>
+        </ContainerItem>
+      </>
     );
   };
 
-
-  let loadingBox = null;
   if (isLoading) {
-    loadingBox = (
-      <StyledActivityIndicator
-        size="large"
-        color={Colors.PrimaryDark}
-        testID="activityLoading"
-      />
+    return (
+      <MainSafeAreaView>
+        <LoadingContainer>
+          <StyledActivityIndicator
+            size="large"
+            color={Colors.PrimaryDark}
+            testID="activityLoading"
+          />
+        </LoadingContainer>
+      </MainSafeAreaView>
     );
   }
 
   return (
     <MainSafeAreaView>
       <DrawerMenu />
-      {loadingBox}
-      <FlatList
-        data={testeConnection}
-        renderItem={({ item }: { item: IProduct }) => <RenderItem item={item} />}
-        keyExtractor={(item: IProduct) => item.id}
-        testID="flatListHome"
-      />
+      <>
+        <FlatList
+          data={testeConnection}
+          renderItem={({ item }: { item: IProduct }) => <RenderItem item={item} />}
+          keyExtractor={(item: IProduct) => item.id}
+          testID="flatListHome"
+        />
+        <View style={{ flexDirection: 'row' }}>
+          <StyledButton title="Anterior" onPress={() => getNewDataPage(currentPage -1)} />
+          <StyledButton title="Próxima" onPress={() => getNewDataPage(currentPage + 1)} />
+        </View>
+      </>
     </MainSafeAreaView>
   );
 };

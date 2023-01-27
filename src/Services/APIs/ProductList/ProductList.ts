@@ -1,6 +1,6 @@
 import api from "../Common/api";
 
-const getProductList = (data: any, token: string) => api.get("storeProducts/?page=1&perPage=5&orderBy=price&orderDirection=asc", {
+const getProductList = (data: any, token: string) => api.get("storeProducts/?page=" + data.page + "&perPage=5&orderBy=name&orderDirection=asc", {
   headers: {
     'Authorization': `Basic ${token}`
   }

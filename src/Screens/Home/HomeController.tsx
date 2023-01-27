@@ -17,30 +17,31 @@ type iProps = StackScreenProps<RootStackParamList, "Produtos">;
 
 const HomeController = ({ route, navigation }: iProps) => {
 
-  const [dataConnection, setDataConnection] = useState<IPerson[]>([]);
   const [testeConnection, setTesteConnection] = useState<IProduct[]>([]);
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const getPersonsGetAPI = useAPI(PersonsAPI.getAllPersons);
   const getProdutListGetApi = useAPI(getProductList);
 
   const userInfo = useAppSelector((state) => state.login.user);
+
+  let currentPage = 1;
   console.log('LOG => USER_INFO: ', { userInfo });
   useEffect(() => {
-    // getDataPage();   
-    getNewDataPage ()
+    getNewDataPage (currentPage) // Sempre inicia busca a página 1;
   }, []);
 
-  const getNewDataPage = async () => {
+  const getNewDataPage = async(pageIndex: number) => {
     setIsLoading(true);
 
     let params: IParamGetProductList = {
-      page: 0,
+      page: pageIndex,
       perPage: 5,
       orderBy: 'name',
       orderDirection: 'asc',
     };
+
+    currentPage = pageIndex;
 
     getProdutListGetApi
       .requestPromise(params, userInfo?.token)
@@ -55,36 +56,19 @@ const HomeController = ({ route, navigation }: iProps) => {
     });
   }
 
-  // const getDataPage = async () => {
-  //   // let token = await useGetToken();
-    
-  //   setIsLoading(true);
-  //   getPersonsGetAPI
-  //     .requestPromise('')
-  //     .then((info: any) => {
-  //       setIsLoading(false);
-  //       setDataConnection(info.persons);
-  //     })
-  //     .catch((error: string) => {
-  //       console.log(error);
-  //     });
-  // };
-
   const goToDetail = (item: IProduct) => {
     navigation.push("Details", {
       itemID: item.id,
-      // info: JSON.stringify(item),
     });
   };
 
-  console.log('LOG => TESTE_CONNECTION: ', { testeConnection })
-
   return (
     <HomeView
-      dataConnection={dataConnection}
+      currentPage={currentPage}
       testeConnection={testeConnection}
       isLoading={isLoading}
       goToDetail={goToDetail}
+      getNewDataPage={getNewDataPage}
     />
   );
 

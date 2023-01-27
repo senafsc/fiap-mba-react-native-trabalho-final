@@ -1,5 +1,6 @@
 import styled from "styled-components/native";
 import { Button } from "react-native-elements";
+import Colors from "../../Styles/Colors";
 
 export const MainSafeAreaView = styled.SafeAreaView`
   flex: 1;
@@ -48,7 +49,7 @@ export const BottomButton = styled.View`
 
 export const StyledButton = styled(Button).attrs({
   buttonStyle: {
-    backgroundColor: "#8a2be2",
+    backgroundColor: `${Colors.blueviolet}`,
     borderRadius: 10,
   },
   containerStyle: {
