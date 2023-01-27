@@ -1,18 +1,17 @@
 import React from "react";
-import { ScrollView } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 import {
   MainContainer,
   TextName,
   TextTitle,
-  TextDetail,
+  TextButton,
   TextNoInfo,
-  StyledImage,
 } from "./DetailStyles";
-import Person from "../../Interfaces/IPerson";
+import IProduct from "../../Interfaces/IProduct";
 
 type iProps = {  
-  objectItem: Person | null;
+  objectItem: IProduct | null;
 };
 const DetailView = ({ objectItem }: iProps) => {
   if (!objectItem) {
@@ -24,30 +23,16 @@ const DetailView = ({ objectItem }: iProps) => {
   }
   return (
     <MainContainer>
-      <ScrollView>
-        <StyledImage source={{ uri: objectItem.image }} />
-        <TextName>
-          {objectItem.firstName} {objectItem.lastName}
-        </TextName>
-        <TextTitle>Endereço</TextTitle>
-        <TextDetail>
-          {objectItem.firstName} {objectItem.lastName}
-        </TextDetail>
-        <TextTitle>Ocupação</TextTitle>
-        <TextDetail>{objectItem.jobTitle}</TextDetail>
-        <TextTitle>Tipo</TextTitle>
-        <TextDetail>
-          {objectItem.jobType} / {objectItem.jobArea}
-        </TextDetail>
-        <TextTitle>Endereço</TextTitle>
-        <TextDetail>{objectItem.address}</TextDetail>
-        <TextDetail>{objectItem.zipCode}</TextDetail>
-        <TextDetail>
-          {objectItem.city} / {objectItem.state} / {objectItem.coutry}
-        </TextDetail>
-        <TextTitle>Telefone</TextTitle>
-        <TextDetail>{objectItem.phone}</TextDetail>
-      </ScrollView>
+      <TextName>{objectItem.name}</TextName>
+      <TextTitle>{`Favorito: ${objectItem.favorite ? 'Sim' : 'Não'}`}</TextTitle>
+      <TextNoInfo>{`Preço: R$ ${objectItem.price}`}</TextNoInfo>
+      
+      <TouchableOpacity onPress={() => {
+        objectItem.favorite = !objectItem.favorite;
+        console.log('teste: ', { favorite: objectItem.favorite })
+      }}>
+        <TextButton>{`${objectItem.favorite ? 'Remover item dos favoritos' : 'Adicionar item aos favoritos'}`}</TextButton>
+      </TouchableOpacity>
     </MainContainer>
   );
 };

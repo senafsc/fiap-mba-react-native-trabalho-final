@@ -57,9 +57,7 @@ const HomeController = ({ route, navigation }: iProps) => {
   }
 
   const goToDetail = (item: IProduct) => {
-    navigation.push("Details", {
-      itemID: item.id,
-    });
+    navigation.push("Details", { info: item });
   };
 
   return (

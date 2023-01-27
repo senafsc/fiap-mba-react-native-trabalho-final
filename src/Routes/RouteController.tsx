@@ -30,7 +30,7 @@ export type RootDrawerParamList = {
 
 export type RootStackParamList = {
   Produtos: undefined;
-  Details: { itemID: string };
+  Details: { info: any };
   MyPosition: undefined;
   Login: undefined;
   SignIn: undefined;
