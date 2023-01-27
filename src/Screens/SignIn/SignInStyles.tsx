@@ -26,7 +26,7 @@ export const Title = styled.Text`
   text-align: center;
 `;
 
-export const LoginBox = styled.View`
+export const SignInBox = styled.View`
   background-color: rgba(255, 255, 255, 0.8);
   margin: 35px;
   border-radius: 15px;
@@ -34,7 +34,7 @@ export const LoginBox = styled.View`
   padding: 20px;
 `;
 
-export const LabelLogin = styled.Text`
+export const LabelSignIn = styled.Text`
   font-size: 15px;
   margin-left: 5px;
   color: #333;

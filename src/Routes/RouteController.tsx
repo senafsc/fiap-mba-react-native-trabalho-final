@@ -11,7 +11,7 @@ import HomeController from "../Screens/Home/HomeController";
 import DetailController from "../Screens/Detail/DetailController";
 import MyPositionController from "../Screens/MyPosition/MyPositionController";
 import Colors from "../Styles/Colors";
-import { useManageNotification } from "../Services/Notification/useManageNotification";
+// import { useManageNotification } from "../Services/Notification/useManageNotification";
 
 import LoginController from "../Screens/Login/LoginController";
 import { PersistGate } from "redux-persist/integration/react";
@@ -19,16 +19,20 @@ import { persistor, store } from "../Store/store";
 
 import { Provider } from "react-redux";
 import { useAppSelector } from "../Store/hooks";
+import SignInController from "../Screens/SignIn/SignInController";
 
 export type RootDrawerParamList = {
   Main: undefined;
-  MyPositionDrawer: undefined;  
+  MyPositionDrawer: undefined;
+  LoginDrawer: undefined;
 };
 
 export type RootStackParamList = {
   Home: undefined;
   Details: { itemID: number; info: string };
   MyPosition: undefined;
+  Login: undefined;
+  SignIn: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -61,7 +65,7 @@ export const StackHome = () => {
 };
 
 const RouteController = () => {    
-    useManageNotification();
+    // useManageNotification();
 
     let drawerNavigation: DrawerNavigationOptions = {
       headerShown: false,
@@ -104,6 +108,15 @@ const RouteController = () => {
               ...drawerNavigation,
             }}
           />
+          <Drawer.Screen
+            name="LoginDrawer"
+            component={StackMyPosition}
+            options={{
+              drawerLabel: "Minha Posição",
+              headerShown: false,
+              ...drawerNavigation,
+            }}
+          />
         </Drawer.Navigator>
       </NavigationContainer>
     );
@@ -116,6 +129,16 @@ const RouteController = () => {
               <Stack.Screen
                 name="MyPosition"
                 component={LoginController}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Login"
+                component={LoginController}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="SignIn"
+                component={SignInController}
                 options={{ headerShown: false }}
               />
             </Stack.Navigator>

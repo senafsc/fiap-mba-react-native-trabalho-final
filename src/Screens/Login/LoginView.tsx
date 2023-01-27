@@ -5,81 +5,89 @@ import { ActivityIndicator } from "react-native-paper";
 import {
   BottomButton,
   BottomScreen,
-  FrontImageBackground,
   LabelLogin,
   LoginBox,
-  LogoDiv,
-  MainContainer,
+  Title,
+  MainSafeAreaView,
   StyledButton,
-  StyledImageBackground,
   TopScreen,
+  NewAccountLabel,
 } from "./LoginStyles";
+
+import { TouchableOpacity } from "react-native";
+
+import Colors from "../../Styles/Colors";
 
 type IProps = {
   isLoadingAuth: boolean;
   submitForm: (email: string, password: string) => void;
+  goToSignInScreen: () => void;
 };
 
-const LoginView = ({ submitForm, isLoadingAuth }: IProps) => {
-  const [email, onChangeText] = React.useState('');
-  const [password, onChangePassword] = React.useState('');
+const LoginView = ({ submitForm, isLoadingAuth, goToSignInScreen }: IProps) => {
+  let [email, onChangeText] = React.useState('');
+  let [password, onChangePassword] = React.useState('');
 
-  const showState = () => {
-    console.log('LOG => STATE: ', { email: email });
+  const onLostFocus = () => {
+    if (email) {
+      onChangeText(email.toLowerCase().trim());
+    }
   }
-  let infoButton = <StyledButton title="Login" onPress={() => {
+
+  let loginButton = <StyledButton title="Login" onPress={() => {
     submitForm(email, password);
   }} />;
   if (isLoadingAuth) {
-    infoButton = <ActivityIndicator size="large" color="red" />;
+    loginButton = <ActivityIndicator size="large" color={ Colors.blueviolet } />;
   }
   return (
-    <MainContainer>
-      <StyledImageBackground
-        source={{
-          uri: "https://previews.123rf.com/images/chagin/chagin1501/chagin150100001/35151812-business-people-working-together.jpg",
-        }}
-        resizeMode="cover"
-      >
-        <FrontImageBackground>
-          <TopScreen>
-            <LogoDiv>RH App</LogoDiv>
-          </TopScreen>
-          <BottomScreen>
-            <LoginBox>
-              <LabelLogin>Login</LabelLogin>
-              <Input
-                placeholder="informe o seu email"
-                leftIcon={{
-                  type: "font-awesome",
-                  name: "envelope",
-                  color: "red",
-                }}
-                onChangeText={onChangeText}
-                value={email}
-                placeholderTextColor={"#999"}
-                autoCompleteType="email"
-              />
-              <LabelLogin>Senha</LabelLogin>
-              <Input
-                placeholder="Informe a sua senha"
-                leftIcon={{
-                  type: "font-awesome",
-                  name: "lock",
-                  color: "red",
-                }}
-                onChangeText={onChangePassword}
-                value={password}
-                secureTextEntry={true}
-                placeholderTextColor={"#999"}
-                autoCompleteType="password"
-              />
-              <BottomButton>{infoButton}</BottomButton>
-            </LoginBox>
-          </BottomScreen>
-        </FrontImageBackground>
-      </StyledImageBackground>
-    </MainContainer>
+    <MainSafeAreaView>
+      <TopScreen>
+        <Title style={{ color: Colors.brown }}>Acessar Loja:</Title>
+      </TopScreen>
+      <BottomScreen>
+        <LoginBox style={{ borderColor: Colors.blueviolet }}>
+          <LabelLogin>Login</LabelLogin>
+          <Input
+            placeholder="informe o seu email"
+            inputStyle={{ color: Colors.blueviolet }}
+            leftIcon={{
+              type: "font-awesome",
+              name: "envelope",
+              color: Colors.blueviolet,
+            }}
+            onChangeText={onChangeText}
+            onBlur={onLostFocus}
+            value={email}
+            placeholderTextColor={"#999"}
+            autoCompleteType="email"
+          />
+          <LabelLogin>Senha</LabelLogin>
+          <Input
+            placeholder="Informe a sua senha"
+            inputStyle={{ color: Colors.blueviolet }}
+            leftIcon={{
+              type: "font-awesome",
+              name: "lock",
+              color: Colors.blueviolet,
+            }}
+            onChangeText={onChangePassword}
+            value={password}
+            secureTextEntry={true}
+            placeholderTextColor={"#999"}
+            autoCompleteType="password"
+          />
+          <BottomButton>{loginButton}</BottomButton>
+          <TouchableOpacity onPress={() => {
+              console.log('LOG => clicou em cadastrar novo usuário');
+              goToSignInScreen();
+            }
+          }>
+            <NewAccountLabel style={{ alignSelf: 'center', fontSize: 16, color: Colors.PrimaryDark }}>Cadastrar novo usuário</NewAccountLabel>
+          </TouchableOpacity>
+        </LoginBox>
+      </BottomScreen>
+    </MainSafeAreaView>
   );
 };
 

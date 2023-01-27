@@ -1,4 +1,4 @@
-const colors = {
+const Colors = {
   White: "#ffffff",
   PrimaryDark: "#fa5757",
   PrimaryMedium: "#fc7474",
@@ -29,6 +29,20 @@ const colors = {
   BackgroundDisabled: "#E1D9D9",
   HeaderBackgroundColor: "#fa5757",
   HeaderTintColor: "#ffffff",
+
+  aliceblue: "#f0f8ff",
+  antiquewhite: "#faebd7",
+  aqua: "#00ffff",
+  aquamarine: "#7fffd4",
+  azure: "#f0ffff",
+  beige: "#f5f5dc",
+  bisque: "#ffe4c4",
+  black: "#000000",
+  blanchedalmond: "#ffebcd",
+  blue: "#0000ff",
+  blueviolet: "#8a2be2",
+  brown: "#a52a2a",
+  navy: "#0000EE"
 };
 
-export default colors;
+export default Colors;

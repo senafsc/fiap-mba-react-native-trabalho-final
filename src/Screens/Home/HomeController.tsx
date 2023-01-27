@@ -6,7 +6,7 @@ import { RootStackParamList } from "../../Routes/RouteController";
 import useAPI from "../../Services/APIs/Common/useAPI";
 import PersonsAPI from "../../Services/APIs/Persons/Persons";
 import IPerson from "../../Interfaces/IPerson";
-import { useGetToken } from "../../Services/Notification/useManageNotification";
+// import { useGetToken } from "../../Services/Notification/useManageNotification";
 import { Button } from "react-native-elements"
 import { useAppDispatch } from "../../Store/hooks";
 import { cleanUser } from "../../Store/Login/LoginSlice";
@@ -41,7 +41,7 @@ const HomeController = ({ route, navigation }: iProps) => {
   }, []);
 
   const getDataPage = async () => {
-    let token = await useGetToken();
+    // let token = await useGetToken();
     
     setIsLoading(true);
     getPersonsGetAPI
