@@ -9,7 +9,8 @@ import { registerRootComponent } from "expo";
 
 import HomeController from "../Screens/Home/HomeController";
 import DetailController from "../Screens/Detail/DetailController";
-import MyPositionController from "../Screens/MyPosition/MyPositionController";
+import ProfileController from "../Screens/Profile/ProfileController";
+import LogoutController from "../Screens/Logout/LogoutController";
 import Colors from "../Styles/Colors";
 // import { useManageNotification } from "../Services/Notification/useManageNotification";
 
@@ -28,11 +29,13 @@ export type RootDrawerParamList = {
 };
 
 export type RootStackParamList = {
-  Home: undefined;
+  Produtos: undefined;
   Details: { itemID: number; info: string };
   MyPosition: undefined;
   Login: undefined;
   SignIn: undefined;
+  LogoutHandler: undefined;
+  Profile: { userName: string, email: string }
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -51,13 +54,25 @@ export const StackHome = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Home"
+        name="Produtos"
         component={HomeController}
         options={screenOptions}
       />
       <Stack.Screen
         name="Details"
         component={DetailController}
+        options={screenOptions}
+      />
+    </Stack.Navigator>
+  );
+};
+
+export const StackProfile = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Profile"
+        component={ProfileController}
         options={screenOptions}
       />
     </Stack.Navigator>
@@ -77,13 +92,13 @@ const RouteController = () => {
       },
     };
 
-    const StackMyPosition = () => {
+    const StackLogout = () => {
       return (
         <Stack.Navigator>
           <Stack.Screen
-            name="MyPosition"
-            component={MyPositionController}
-            options={{ ...screenOptions, title: "Minha Posição" }}
+            name="LogoutHandler"
+            component={LogoutController}
+            options={{ ...screenOptions, title: "Logout" }}
           />
         </Stack.Navigator>
       );
@@ -93,26 +108,27 @@ const RouteController = () => {
   if (userInfo && userInfo.token !== "") {
     return (
       <NavigationContainer>
-        <Drawer.Navigator initialRouteName="Main">
+        <Drawer.Navigator initialRouteName="Principal">
           <Drawer.Screen
-            name="Main"
+            name="ProfileView"
+            component={StackProfile}
+            options={{ drawerLabel: "Nome do usuário", ...drawerNavigation }}
+          />
+          <Drawer.Screen
+            name="Principal"
             component={StackHome}
-            options={{ drawerLabel: "Main", ...drawerNavigation }}
+            options={{ drawerLabel: "Principal", ...drawerNavigation }}
           />
           <Drawer.Screen
-            name="MyPositionDrawer"
-            component={StackMyPosition}
-            options={{
-              drawerLabel: "Minha Posição",
-              headerShown: false,
-              ...drawerNavigation,
-            }}
+            name="Favoritos"
+            component={StackHome}
+            options={{ drawerLabel: "Favoritos", ...drawerNavigation }}
           />
           <Drawer.Screen
-            name="LoginDrawer"
-            component={StackMyPosition}
+            name="Logout"
+            component={StackLogout}
             options={{
-              drawerLabel: "Minha Posição",
+              drawerLabel: "Logout",
               headerShown: false,
               ...drawerNavigation,
             }}
@@ -126,11 +142,6 @@ const RouteController = () => {
         <PersistGate loading={null} persistor={persistor}>
           <NavigationContainer>
             <Stack.Navigator>
-              <Stack.Screen
-                name="MyPosition"
-                component={LoginController}
-                options={{ headerShown: false }}
-              />
               <Stack.Screen
                 name="Login"
                 component={LoginController}

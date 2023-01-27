@@ -12,13 +12,11 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../../Routes/RouteController";
 import IUCreateUser from "../../Interfaces/IUCreateUser";
 
-type iProps = StackScreenProps<RootStackParamList, "Login">
+type iProps = StackScreenProps<RootStackParamList, "SignIn">
 
-const SignInController = ({ route, navigation }: iProps) => {
+const SignInController = ({ navigation, route }: iProps) => {
   const [isLoadingAuth, setIsLoadingAuth] = useState<boolean>(false);
   const getSignInAPI = useAPI(getSignIn);
-
-  const dispatch = useAppDispatch();
 
   // Retorna para tela anterior;
   const goToBack = () => {

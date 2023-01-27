@@ -11,7 +11,7 @@ import { ToastAndroid } from 'react-native';
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../../Routes/RouteController";
 
-type iProps = StackScreenProps<RootStackParamList, "SignIn">
+type iProps = StackScreenProps<RootStackParamList, "Login">
 
 const LoginController = ({ route, navigation }: iProps) => {
   const [isLoadingAuth, setIsLoadingAuth] = useState<boolean>(false);

@@ -1,19 +1,24 @@
 const Colors = {
   White: "#ffffff",
-  PrimaryDark: "#fa5757",
-  PrimaryMedium: "#fc7474",
-  PrimaryLight: "#fc9797",
-  PrimaryLightest: "#fcd4d4",
+  // PrimaryDark: "#fa5757",
+  // PrimaryMedium: "#fc7474",
+  // PrimaryLight: "#fc9797",
+  // PrimaryLightest: "#fcd4d4",
 
-  SecondaryDark: "#688C38",
-  SecondaryMedium: "#86B34A",
-  SecondaryLight: "#9ED259",
-  SecondaryLightest: "#BAF172",
+  // SecondaryDark: "#688C38",
+  // SecondaryMedium: "#86B34A",
+  // SecondaryLight: "#9ED259",
+  // SecondaryLightest: "#BAF172",
 
-  TertiaryDark: "#C35403",
-  TertiaryMedium: "#E16206",
-  TertiaryLight: "#F87C23",
-  TertiaryLightest: "#F87C23",
+  // TertiaryDark: "#C35403",
+  // TertiaryMedium: "#E16206",
+  // TertiaryLight: "#F87C23",
+  // TertiaryLightest: "#F87C23",
+
+  PrimaryDark: "#688C38",
+  PrimaryMedium: "#86B34A",
+  PrimaryLight: "#9ED259",
+  PrimaryLightest: "#BAF172",
 
   NeutralDark: "#39322E",
   NeutralMedium: "#9C8F8F",
@@ -27,7 +32,7 @@ const Colors = {
   Success: "#508110",
 
   BackgroundDisabled: "#E1D9D9",
-  HeaderBackgroundColor: "#fa5757",
+  HeaderBackgroundColor: "#9ED259",
   HeaderTintColor: "#ffffff",
 
   aliceblue: "#f0f8ff",
