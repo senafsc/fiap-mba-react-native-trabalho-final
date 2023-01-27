@@ -16,45 +16,48 @@ import {
   StyledImage,
 } from "./HomeStyles";
 import DrawerMenu from "../../Components/DrawerMenu/DrawerMenu";
+import IProduct from "../../Interfaces/IProduct";
 
 type iProps = {
   dataConnection: IPerson[];
+  testeConnection: IProduct[];
   isLoading: boolean;
-  goToDetail: (item: IPerson) => void;
+  goToDetail: (item: IProduct) => void;
 };
 
 const HomeView = ({
+  testeConnection,
   dataConnection,
   isLoading,
   goToDetail,
 }: iProps) => {
   
 
-  const RenderItem = ({ item }: { item: IPerson }) => {
+  const RenderItem = ({ item }: { item: IProduct }) => {
     
     return (
       <ContainerItem
         onPress={() => goToDetail(item)}
-        testID={"button" + item.CPF.toString()}
+        testID={"button" + item.id}
       >
         <>
           <TextsView>
-            <View>
+            {/* <View>
               <StyledImage source={{ uri: item.image }} />
-            </View>
+            </View> */}
             <View>
               <TextNameStyle>
                 <TextTitle>
-                  {item.firstName} {item.lastName}
+                  {item.name}
                 </TextTitle>
               </TextNameStyle>
               <TextNameStyle>
                 <TextDetail>
-                  {item.address} - {item.state} - {item.zipCode}
+                  {item.price}
                 </TextDetail>
               </TextNameStyle>
               <TextNameStyle>
-                <TextDetail>{item.jobTitle}</TextDetail>
+                <TextDetail>{item.favorite}</TextDetail>
               </TextNameStyle>
             </View>
           </TextsView>
@@ -81,9 +84,9 @@ const HomeView = ({
       <DrawerMenu />
       {loadingBox}
       <FlatList
-        data={dataConnection}
-        renderItem={({ item }: { item: IPerson }) => <RenderItem item={item} />}
-        keyExtractor={(item: IPerson) => item.CPF.toString()}
+        data={testeConnection}
+        renderItem={({ item }: { item: IProduct }) => <RenderItem item={item} />}
+        keyExtractor={(item: IProduct) => item.id}
         testID="flatListHome"
       />
     </MainSafeAreaView>
