@@ -1,5 +1,5 @@
 export default interface IProduct {
-  id: string;
+  _id: string;
   name: string,
   price: number,
   favorite: boolean

@@ -57,6 +57,7 @@ const HomeController = ({ route, navigation }: iProps) => {
   }
 
   const goToDetail = (item: IProduct) => {
+    console.log('LOG => EXIBE_DETALHE: ', { item });
     navigation.push("Details", { info: item });
   };
 

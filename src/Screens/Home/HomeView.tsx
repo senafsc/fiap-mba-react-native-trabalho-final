@@ -95,7 +95,7 @@ const HomeView = ({
         <FlatList
           data={testeConnection}
           renderItem={({ item }: { item: IProduct }) => <RenderItem item={item} />}
-          keyExtractor={(item: IProduct) => item.id}
+          keyExtractor={(item: IProduct) => item._id}
           testID="flatListHome"
         />
         <View style={{ flexDirection: 'row' }}>

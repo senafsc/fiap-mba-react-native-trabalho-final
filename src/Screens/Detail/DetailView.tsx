@@ -12,8 +12,9 @@ import IProduct from "../../Interfaces/IProduct";
 
 type iProps = {  
   objectItem: IProduct | null;
+  manageFavorite: (data: any) => void
 };
-const DetailView = ({ objectItem }: iProps) => {
+const DetailView = ({ objectItem, manageFavorite }: iProps) => {
   if (!objectItem) {
     return (
       <>
@@ -27,10 +28,7 @@ const DetailView = ({ objectItem }: iProps) => {
       <TextTitle>{`Favorito: ${objectItem.favorite ? 'Sim' : 'Não'}`}</TextTitle>
       <TextNoInfo>{`Preço: R$ ${objectItem.price}`}</TextNoInfo>
       
-      <TouchableOpacity onPress={() => {
-        objectItem.favorite = !objectItem.favorite;
-        console.log('teste: ', { favorite: objectItem.favorite })
-      }}>
+      <TouchableOpacity onPress={() => manageFavorite({ objectID: objectItem._id })}>
         <TextButton>{`${objectItem.favorite ? 'Remover item dos favoritos' : 'Adicionar item aos favoritos'}`}</TextButton>
       </TouchableOpacity>
     </MainContainer>
