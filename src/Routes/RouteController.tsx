@@ -11,6 +11,7 @@ import HomeController from "../Screens/Home/HomeController";
 import DetailController from "../Screens/Detail/DetailController";
 import ProfileController from "../Screens/Profile/ProfileController";
 import LogoutController from "../Screens/Logout/LogoutController";
+import FavoritesController from '../Screens/Favorites/FavoritesController'
 import Colors from "../Styles/Colors";
 // import { useManageNotification } from "../Services/Notification/useManageNotification";
 
@@ -29,13 +30,14 @@ export type RootDrawerParamList = {
 };
 
 export type RootStackParamList = {
-  Produtos: undefined;
+  Produtos: { update: boolean };
   Details: { info: any };
   MyPosition: undefined;
   Login: undefined;
   SignIn: undefined;
   LogoutHandler: undefined;
   Profile: { userName: string, email: string }
+  Favorites: undefined
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -73,6 +75,18 @@ export const StackProfile = () => {
       <Stack.Screen
         name="Profile"
         component={ProfileController}
+        options={screenOptions}
+      />
+    </Stack.Navigator>
+  );
+};
+
+export const StackFavoritos = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Favorites"
+        component={FavoritesController}
         options={screenOptions}
       />
     </Stack.Navigator>
@@ -121,7 +135,7 @@ const RouteController = () => {
           />
           <Drawer.Screen
             name="Favoritos"
-            component={StackHome}
+            component={StackFavoritos}
             options={{ drawerLabel: "Favoritos", ...drawerNavigation }}
           />
           <Drawer.Screen

@@ -2,7 +2,6 @@ import React from "react";
 import { View, FlatList } from "react-native";
 
 import Colors from "../../Styles/Colors";
-import IPerson from "../../Interfaces/IPerson";
 
 import {
   ContainerItem,
@@ -14,24 +13,19 @@ import {
   TextDetail,
   Separator,
   TextTitleName,
-  StyledButton,
   LoadingContainer
-} from "./HomeStyles";
+} from "./FavoritesStyles";
 import DrawerMenu from "../../Components/DrawerMenu/DrawerMenu";
 import IProduct from "../../Interfaces/IProduct";
 
 type iProps = {
-  getNewDataPage: (pageIndex: number) => void
-  testeConnection: IProduct[];
-  currentPage: number;
+  testeConnection: IProduct;
   isLoading: boolean;
   goToDetail: (item: IProduct) => void;
 };
 
-const HomeView = ({
-  currentPage,
+const FavoritesView = ({
   testeConnection,
-  getNewDataPage,
   isLoading,
   goToDetail,
 }: iProps) => {
@@ -42,16 +36,11 @@ const HomeView = ({
     return (
       <>
         <ContainerItem
-          onPress={() => {
-            goToDetail(item);
-          }}
+          onPress={() => goToDetail(item)}
           testID={"button" + item._id}
         >
           <>
             <TextsView>
-              {/* <View>
-                <StyledImage source={{ uri: item.image }} />
-              </View> */}
               <View style={{ maxWidth: '90%', justifyContent: 'center' }}>
                 <TextNameStyle>
                   <TextTitleName>Nome:</TextTitleName>
@@ -65,7 +54,7 @@ const HomeView = ({
 
                 <TextNameStyle>
                   <TextDetail>Favorito:</TextDetail>
-                  <TextDetail>{item.favorite ? 'Sim' : 'Não'}</TextDetail>
+                  <TextDetail>Sim</TextDetail>
                 </TextNameStyle>
               </View>
             </TextsView>
@@ -100,13 +89,9 @@ const HomeView = ({
           keyExtractor={(item: IProduct) => item._id}
           testID="flatListHome"
         />
-        <View style={{ flexDirection: 'row' }}>
-          <StyledButton title="Anterior" onPress={() => getNewDataPage(currentPage -1)} />
-          <StyledButton title="Próxima" onPress={() => getNewDataPage(currentPage + 1)} />
-        </View>
       </>
     </MainSafeAreaView>
   );
 };
 
-export default HomeView;
+export default FavoritesView;

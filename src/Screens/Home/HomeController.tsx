@@ -15,6 +15,8 @@ import IProduct from "../../Interfaces/IProduct";
 
 type iProps = StackScreenProps<RootStackParamList, "Produtos">;
 
+let doUpdate = true;
+
 const HomeController = ({ route, navigation }: iProps) => {
 
   const [testeConnection, setTesteConnection] = useState<IProduct[]>([]);
@@ -29,6 +31,12 @@ const HomeController = ({ route, navigation }: iProps) => {
   console.log('LOG => USER_INFO: ', { userInfo });
   useEffect(() => {
     getNewDataPage (currentPage) // Sempre inicia busca a página 1;
+  }, []);
+
+  useEffect(() => {
+    navigation.addListener('focus', () => {
+      getNewDataPage(currentPage);
+    });
   }, []);
 
   const getNewDataPage = async(pageIndex: number) => {
@@ -56,9 +64,14 @@ const HomeController = ({ route, navigation }: iProps) => {
     });
   }
 
+  if (route?.params?.update === true && doUpdate === true) {
+    doUpdate = false;
+    getNewDataPage(currentPage);
+  }
+
   const goToDetail = (item: IProduct) => {
     console.log('LOG => EXIBE_DETALHE: ', { item });
-    navigation.push("Details", { info: item });
+    navigation.navigate("Details", { info: item });
   };
 
   return (

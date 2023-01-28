@@ -5,7 +5,7 @@ import { RootStackParamList } from "../../Routes/RouteController";
 import useAPI from "../../Services/APIs/Common/useAPI";
 import IProduct from "../../Interfaces/IProduct";
 import { useAppSelector } from "../../Store/hooks";
-import { postManageFavorite, IParamPostManageFavorite } from "../../Services/APIs/ManageFavorite/ManageFavorite";
+import { postManageFavorite } from "../../Services/APIs/ManageFavorite/ManageFavorite";
 
 type iProps = StackScreenProps<RootStackParamList, "Details">;
 
@@ -19,7 +19,7 @@ const DetailController = ({ navigation, route }: iProps) => {
         getProdutListGetApi
           .requestPromise(data.objectID, userInfo?.token)
           .then((response: any) => {
-            navigation.navigate("Produtos");
+            navigation.push("Produtos", { update: true });
           })
           .catch((error: any) => {
             console.log('LOG => Erro ao atualizar o item: ', { error });
