@@ -1,5 +1,15 @@
 # ATENÇÃO: Este trabalho foi entregue originalmente em 27/01/2023:
-  #### A entrega original está toda na branch 'feature/trabalho_final'. Porém, verificamos que faltaram algumas etapas para concluir o projeto. Por isso, estamos editando esta branch para adequar o projeto conforme especificado na orientação do trabalho.
+  #### A entrega original está toda na branch 'feature/trabalho_final'. Porém, verificamos que faltaram algumas etapas para concluir o projeto. Por isso, estamos editando esta branch (main) para adequar o projeto conforme especificado na orientação do trabalho.
+  <br>
+  Os ajustes realizados foram:
+
+    - Melhoria do componente loading da tela Home (lista de produtos) para utilizar um overlayer enquanto a tela está carregando.
+
+    - Correção da paginação dos produtos;
+
+    - Implementação da consulta e exibição da posição atual do usuário na tela que lista os produtos;
+
+    - Obs: Não foi possível implementar o mapa na tela de detalhes porque o api /storeProducts/product/:productID não está respondendo;
   
 ---
 
