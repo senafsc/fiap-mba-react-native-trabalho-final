@@ -1,11 +1,10 @@
 import api from "../Common/api";
 
-const getProductList = (data: any, token: string) => api.get("storeProducts/?page=" + data.page + "&perPage=5&orderBy=name&orderDirection=asc", {
+const getProductList = (data: any, token: string) => api.get("storeProducts/?page=" + data.page + "&perPage=3&orderBy=name&orderDirection=asc", {
   headers: {
     'Authorization': `Basic ${token}`
   }
 });
-
 
 type IParamGetProductList = {
   page: number;

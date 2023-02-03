@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { Button } from "react-native-elements";
+import { Button, Overlay } from "react-native-elements";
 import Colors from "../../Styles/Colors";
 
 export const MainSafeAreaView = styled.SafeAreaView`
@@ -7,6 +7,14 @@ export const MainSafeAreaView = styled.SafeAreaView`
   flex-direction: column;
   justify-content: flex-start;
 `;
+
+export const LoadingOverlay = styled(Overlay).attrs({
+  overlayStyle: {
+    backgroundColor: 'transparent',
+    width: 50,
+    height: 50
+  }
+})``
 
 export const LoadingContainer = styled.View`
   flex: 1;
@@ -21,6 +29,18 @@ export const StyledActivityIndicator = styled.ActivityIndicator`
 export const ContainerItem = styled.TouchableOpacity`
   margin-top: 10px;
   margin-bottom: 10px;
+`;
+
+export const TopScreen = styled.View`
+  flex: 7;
+  align-content: center;
+  justify-content: center;
+`;
+
+export const BottomScreen = styled.View`
+  flex: 5;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 export const TextsView = styled.View`

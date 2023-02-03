@@ -47,7 +47,9 @@ const Colors = {
   blue: "#0000ff",
   blueviolet: "#8a2be2",
   brown: "#a52a2a",
-  navy: "#0000EE"
+  navy: "#0000EE",
+
+  loading: 'rgb(0, 0, 0, 0.2)'
 };
 
 export default Colors;

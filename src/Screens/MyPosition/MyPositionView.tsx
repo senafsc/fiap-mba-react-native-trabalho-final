@@ -12,6 +12,8 @@ import {
 import DrawerMenu from "../../Components/DrawerMenu/DrawerMenu";
 import { LocationObject } from "expo-location";
 
+import { LoadingOverlay, StyledActivityIndicator } from "../Home/HomeStyles";
+
 type IProps = {
   position: LocationObject | null;
   statusPosition: number;
@@ -27,18 +29,17 @@ export default function MyPositionView({
 }: IProps) {
   let infoBox = null;
   if (statusPosition === 0) {
-    infoBox = (
+     startGetGeoLocation(0);
+     infoBox = (
       <>
-        <AllScreenStyledButton
-          title="Verificar Posição"
-          onPress={() => startGetGeoLocation(0)}
-        />
-        <AllScreenStyledButton
-          title="Verificar Ultima Posição"
-          onPress={() => startGetGeoLocation(1)}
-        />
+        <LoadingOverlay>
+          <StyledActivityIndicator
+            size="large"
+            testID="activityLoading"
+          />
+        </LoadingOverlay>
       </>
-    );
+     );
   } else if (statusPosition === 1) {
     infoBox = (
       <ActivityIndicatorStyled size="large" color={Colors.PrimaryDark} />
@@ -56,6 +57,9 @@ export default function MyPositionView({
     }
     infoBox = (
       <>
+        <ItemsInfo>
+          <TitleText>Minha posição atual: </TitleText>
+        </ItemsInfo>
         <ItemsInfo>
           <TitleText>Latitude: </TitleText>
           <DetailText>{position!.coords.latitude}</DetailText>
